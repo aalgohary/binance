@@ -28,17 +28,23 @@ git clone https://github.com/aalgohary/binance.git
 cd binance
 ```
 
-2. Run the application:
+2. Install the requirements:
+
+```
+pip install -r requirements.txt
+```
+
+3. Run the application:
 
 ```
 python app.py
 ```
 
-3. Access the application:
+4. Access the application:
 
 Open your web browser and navigate to `http://localhost:5500`. You will see a form where you can enter the start day and capital per month. Fill in the required information and click the "Retrieve Data" button.
 
-4. View trade history and analysis:
+5. View trade history and analysis:
 
 After clicking the "Retrieve Data" button, the application will retrieve the trade history data from the Binance API and perform various calculations and visualizations. Once the processing is complete, you will be redirected to a page showing the trade history table, total net profit, winning percentage, profits per month, and cumulative profit percentage.
 
