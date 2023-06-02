@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Binance Trade History</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Binance Trade History</h1>
+    </header>
+
+    <section id="profit-section">
+        <h2>Total Net Profit: ${{ sum_profit }} - {{ sum_profit_perct }}%</h2>
+        <h2>Winning Percentage: {{ win_percent }}%</h2>
+        <h2>Profits per Month</h2>
+        <div id="monthly-profits">
+            {{ monthly_profits | safe }}
+        </div>
+    </section>
+
+    <section id="chart-section">
+        <h2>Cumulative Profit Percentage</h2>
+        <div>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+        <h2>Net Profit by Market and Month</h2>
+        <div id="chart-container">
+            <img src="{{ heatmap_path }}" alt="Heatmap" id="heatmap-image">
+        </div>
+    </section>
+
+    <section id="trade-history-section">
+        <h2>Trade History</h2>
+        <div id="trade-history">
+            {{ trade_history | safe }}
+        </div>
+    </section>
+
+    <script>
+        // Get the line graph data from Flask and parse it
+        var lineGraphData = JSON.parse('{{ line_graph_data | safe }}');
+
+        // Remove dates with no value
+        var filteredData = lineGraphData.datasets[0].data.filter(function(value) {
+            return value !== null;
+        });
+        lineGraphData.labels = lineGraphData.labels.slice(0, filteredData.length);
+        lineGraphData.datasets[0].data = filteredData;
+
+        // Get the canvas element
+        var ctx = document.getElementById('lineChart').getContext('2d');
+
+        // Calculate the maximum value from the data
+        var maxValue = Math.max(...filteredData);
+
+        // Create the line chart
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: lineGraphData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Cumulative Profit Percentage'
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            suggestedMax: Math.ceil(maxValue / 10) * 10, // Adjust the maximum value dynamically
+                            stepSize: 0.1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

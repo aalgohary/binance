@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Binance Trade History</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/script.js"></script>
+    <style>
+        textarea::placeholder {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Binance Trade History</h1>
+    </header>
+
+    <section id="api-keys-section">
+        <h2>Enter Start Day and Capital</h2>
+        <div>
+            <label for="start-day">Start Day:</label>
+            <textarea id="start-day" required placeholder="Day of starting your subscription with Neuro.&#10;e.g., 24"></textarea>
+        </div>
+        <div>
+            <label for="capital-per-month">Capital per Month:</label>
+            <textarea id="capital-per-month" required placeholder="Comma separated month:capital pairs.&#10;e.g., 1: 1000, 2: 2000, 3: 3000"></textarea>
+        </div>
+        <h2>Enter API Keys and Secrets</h2>
+        <div>
+            <label for="api-keys">API Keys:</label>
+            <textarea id="api-keys" rows="3" required placeholder="Comma separated READ ONLY API Keys.&#10;e.g., key1, key2, key3"></textarea>
+        </div>
+        <div>
+            <label for="api-secrets">API Secrets:</label>
+            <textarea id="api-secrets" rows="3" required placeholder="Comma separated READ ONLY corresponding API Secrets.&#10;e.g., secret1, secret2, secret3"></textarea>
+        </div>
+        <div>
+            <button id="retrieve-data-button">Retrieve Data</button>
+        </div>
+        <div id="loading" style="display: none;"><img src="../static/loading.gif" /></div>
+    </section>
+</body>
+</html>
