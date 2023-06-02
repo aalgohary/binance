@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 ```
 git clone https://github.com/aalgohary/binance.git
-cd binance-trade-history
+cd binance
 ```
 
 2. Run the application:
